@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2019 The Linux Foundation. All rights reserved.
+ * Copyright (c) 2012-2018 The Linux Foundation. All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
@@ -1214,9 +1214,6 @@ populate_dot11f_ext_cap(tpAniSirGlobal pMac,
 
 	if (psessionEntry && psessionEntry->enable_bcast_probe_rsp)
 		p_ext_cap->fils_capability = 1;
-
-	if (pMac->roam.configParam.btm_offload_config & BTM_OFFLOAD_ENABLED_MASK)
-		p_ext_cap->bss_transition = 1;
 
 	/* Need to calulate the num_bytes based on bits set */
 	if (pDot11f->present)
@@ -6055,7 +6052,7 @@ tSirRetStatus populate_dot11f_rrm_ie(tpAniSirGlobal pMac,
 
 void populate_mdie(tpAniSirGlobal pMac,
 		   tDot11fIEMobilityDomain *pDot11f,
-		   uint8_t mdie[])
+		   uint8_t mdie[SIR_MDIE_SIZE])
 {
 	pDot11f->present = 1;
 	pDot11f->MDID = (uint16_t) ((mdie[1] << 8) | (mdie[0]));
